@@ -9,7 +9,12 @@ client = TestClient(app)
 def test_health_endpoint() -> None:
     response = client.get("/health")
     assert response.status_code == 200
-    assert response.json()["status"] == "healthy"
+    assert response.json() == {
+        "status": "healthy",
+        "application": "student-ml-api",
+        "application_version": "1.1.0",
+        "model_version": "model-1",
+    }
 
 
 def test_prediction_endpoint() -> None:
