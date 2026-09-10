@@ -40,4 +40,9 @@ jobs:
           tags: |
             ${{ env.IMAGE_NAME }}:${{ github.ref_name }}
             ${{ env.IMAGE_NAME }}:latest
+            ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          build-args: |
+            APP_VERSION=${{ github.ref_name }}
+            GIT_COMMIT=${{ github.sha }}
+            BUILD_DATE=${{ github.event.head_commit.timestamp }}
           labels: ${{ steps.meta.outputs.labels }}
